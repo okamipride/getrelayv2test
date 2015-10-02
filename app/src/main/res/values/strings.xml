@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">GetRelayV2</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="relay_url">r9402.dch.dlink.com</string>
+    <string name="default_did">z12345678901234567890000000001</string>
+    <string name="default_hash">z12345678901234567890000000001</string>
+</resources>
