@@ -17,27 +17,47 @@ public  class ReadGoData extends Getrelayv2.ReadCallback.Stub {
     TextView show;
     long fd = -1;
 
-
     public void  SetFD(long connfd) {
         fd = connfd;
     }
 
     public void ReadBytes(byte[] data){
         String read = null;
+        Log.d(TAG,"ReadBytes Enter");
         try {
-            read = new String(data, "UTF-8");
-
-            if (fd!= -1) {
-                try {
-                    Getrelayv2.WriteOk(fd);
-                } catch (Exception e) {
-                    e.printStackTrace();
-
+            if (data != null) {
+                read = new  String(data, "UTF-8");
+                Log.d(TAG,"ReadBytes"+read);
+                if (fd!= -1) {
+                    try {
+                        Getrelayv2.WriteOk(fd);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        Log.d(TAG, read);
+
+    }
+
+    /*
+        error_none                 = 0x00
+        error_404                  = 0x01
+        error_connect_host         = 0x02
+        error_EOF                  = 0x03
+        error_ErrNoProgress        = 0x04
+        error_ErrShortBuffer       = 0x05
+        error_ErrShortWrite        = 0x06
+        error_ErrUnexpectedEOF     = 0x07
+        error_not_io_error         = 0x08
+        error_connect_resolve_host = 0x09
+        error_reconnect_fail       = 0x0a
+    */
+
+    public void RecieveError(long err) {
+        Log.d(TAG, "recieve error = "+ err);
     }
 }

@@ -30,20 +30,6 @@ public class GetRelayActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     public void OnGetRelay(View v) {
         new GetRelayAsyncTask().execute();
@@ -53,11 +39,9 @@ public class GetRelayActivity extends AppCompatActivity {
         new CloseFDAsyncTask().execute(myfd);
     }
 
-    public class SysPrint extends Getrelayv2.Printer.Stub {
-        public String Print(String s) {
-            //System.out.println(s);
-            return s;
-        }
+    public void OnWriteOK(View v) {
+        new WriteOKAsyncTask().execute(myfd);
+
     }
 
     private class GetRelayAsyncTask extends AsyncTask<Void, Void , Long> {
@@ -97,6 +81,26 @@ public class GetRelayActivity extends AppCompatActivity {
         protected void onPostExecute(Long ret) {
             TextView resview =  (TextView)findViewById(R.id.txtv_result);
             resview.setText("fd = " + ret.toString()+ " has closed");
+        }
+    }
+
+    private class WriteOKAsyncTask extends AsyncTask<Long, Void , Long> {
+
+        @Override
+        protected Long doInBackground(Long... fd) {
+            try {
+                Getrelayv2.WriteOk(myfd);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return myfd;
+        }
+
+        @Override
+        protected void onPostExecute(Long ret) {
+            //TextView resview =  (TextView)findViewById(R.id.txtv_result);
+            //resview.setText("fd = " + ret.toString()+ " has closed");
         }
     }
 }

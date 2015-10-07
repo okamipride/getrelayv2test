@@ -71,7 +71,14 @@
         android:layout_width="352dp"
         android:layout_height="wrap_content"
         android:text="Close"
-        android:id="@+id/button"
+        android:id="@+id/btn_close"
         android:onClick="OnCloseFD" />
+
+    <Button
+        android:layout_width="352dp"
+        android:layout_height="wrap_content"
+        android:text="WriteOK"
+        android:id="@+id/btn_write"
+        android:onClick="OnWriteOK" />
 
 </LinearLayout>
