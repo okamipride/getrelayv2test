@@ -45,9 +45,9 @@ public  class ReadGoData extends Getrelayv2.ReadCallback.Stub {
 
     /*
         error_none                 = 0x00
-        error_404                  = 0x01
+        error_404                          = 0x01
         error_connect_host         = 0x02
-        error_EOF                  = 0x03
+        error_EOF          = 0x03
         error_ErrNoProgress        = 0x04
         error_ErrShortBuffer       = 0x05
         error_ErrShortWrite        = 0x06
