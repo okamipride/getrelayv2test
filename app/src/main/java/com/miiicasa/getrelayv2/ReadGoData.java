@@ -3,15 +3,15 @@ package com.miiicasa.getrelayv2;
 import android.content.Context;
 import android.util.Log;
 import android.widget.TextView;
-import go.getrelayv2.Getrelayv2;
+import go.gorelay.Gorelay;
 import java.io.UnsupportedEncodingException;
 
-import go.getrelayv2.Getrelayv2;
+import go.gorelay.Gorelay;
 
 /**
  * Created by rachael on 2015/9/29.
  */
-public  class ReadGoData extends Getrelayv2.ReadCallback.Stub {
+public  class ReadGoData extends Gorelay.ReadCallback.Stub {
 
     final static String TAG = "ReadGoData";
     TextView show;
@@ -30,7 +30,7 @@ public  class ReadGoData extends Getrelayv2.ReadCallback.Stub {
                 Log.d(TAG,"ReadBytes"+read);
                 if (fd!= -1) {
                     try {
-                        Getrelayv2.WriteOk(fd);
+                        Gorelay.GoWriteOK(fd);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

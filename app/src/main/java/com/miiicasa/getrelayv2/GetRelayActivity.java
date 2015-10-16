@@ -3,17 +3,18 @@ package com.miiicasa.getrelayv2;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import go.getrelayv2.Getrelayv2;
+import go.gorelay.Gorelay;
 
 
 public class GetRelayActivity extends AppCompatActivity {
     long myfd = -1;
-    Getrelayv2.ReadCallback cb;
+    Gorelay.ReadCallback cb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,8 @@ public class GetRelayActivity extends AppCompatActivity {
     }
 
     private class GetRelayAsyncTask extends AsyncTask<Void, Void , Long> {
-        String relay_url = "r9402.dch.dlink.com";
+       // String relay_url = "r9402.dch.dlink.com";
+       String relay_url = "r0101.astra.miiicasa.com";
         String default_did = "12345678901234567890000000000001";
         String default_hash ="12345678901234567890000000000001";
 
@@ -53,10 +55,11 @@ public class GetRelayActivity extends AppCompatActivity {
         protected Long doInBackground(Void... params) {
 
             try {
-                myfd = Getrelayv2.Getrelay(default_did, default_hash, relay_url, cb);
+                myfd = Gorelay.GoGetRelayV1(default_did, default_hash, relay_url, cb);
                 ((ReadGoData)cb).SetFD(myfd);
             }catch (Exception e) {
                 e.printStackTrace();
+                Log.d("GetRelayActivity:",e.toString());
             }
             Long ret = Long.valueOf(myfd);
             return   ret;
@@ -73,7 +76,7 @@ public class GetRelayActivity extends AppCompatActivity {
 
         @Override
         protected Long doInBackground(Long... fd) {
-            Getrelayv2.CloseConn(myfd);
+            Gorelay.GoClose(myfd);
             return myfd;
         }
 
@@ -89,7 +92,7 @@ public class GetRelayActivity extends AppCompatActivity {
         @Override
         protected Long doInBackground(Long... fd) {
             try {
-                Getrelayv2.WriteOk(myfd);
+                Gorelay.GoWriteOK(myfd);
             } catch (Exception e) {
                 e.printStackTrace();
             }
